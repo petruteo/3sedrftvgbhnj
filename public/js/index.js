@@ -9,15 +9,17 @@ socket.on('connect', () => {
             //     createdAt: 321
             // });
 
-            socket.emit('createMessage', {
-                from: "Mariusila",
-                text: "mesaj de la client"
+            // socket.emit('createMessage', {
+            //     from: "Mariusila",
+            //     text: "mesaj de la client"
         
-            });
+            // });
 
-            socket.on('newMessage', (mess) => {
-                console.log('mesaj primit de la server', mess)
-            });
+            
+        });
+
+socket.on('createMessage', (message) => {
+            console.log('mesaj primit de la server', message)
         });
         
 socket.on('disconnect', () => {

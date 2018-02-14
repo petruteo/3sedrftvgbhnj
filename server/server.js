@@ -31,15 +31,14 @@ io.on('connection',  (socket) => {
 
 socket.on('createMessage', (message) => {
     console.log('new message received', message);
+    io.emit('createMessage', {
+        from: message.from,
+        text: message.text,
+        createdAt: new Date().getTime()
+    });
 });
+ 
 
-socket.emit('newMessage', 
-{
-    from: "Petrutila",
-    text: "mesaj de la server",
-    createdAt: 123
-}
-);
 
 socket.on('disconnect', () => {
         console.log('browser disconnected');
