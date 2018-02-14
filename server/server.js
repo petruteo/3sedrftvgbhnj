@@ -19,10 +19,34 @@ app.use(express.static(publicPath));
 io.on('connection',  (socket) => {
     console.log('new user connected');
 
-    socket.on('disconnect', () => {
+// socket.emit('newEmail', {
+//     from: 'mike@example.com',
+//     text: 'hey, my text here',
+//     createdAt: 123
+// });
+
+// socket.on('createEmail', (newEmail) => {
+// console.log('createEmail', newEmail);
+// });
+
+socket.on('createMessage', (message) => {
+    console.log('new message received', message);
+});
+
+socket.emit('newMessage', 
+{
+    from: "Petrutila",
+    text: "mesaj de la server",
+    createdAt: 123
+}
+);
+
+socket.on('disconnect', () => {
         console.log('browser disconnected');
     });
 });
+
+
 
 server.listen(port, () => {
     console.log(`listening on port ${port}`);
