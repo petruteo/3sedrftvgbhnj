@@ -18,8 +18,9 @@ socket.on('connect', () => {
             
         });
 
-socket.on('createMessage', (message) => {
-            console.log('mesaj primit de la server', message)
+socket.on('newMessage', (message) => {
+            console.log('mesaj primit de la server', message);
+            document.write('mesaj primit de la server');
         });
         
 socket.on('disconnect', () => {
