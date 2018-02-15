@@ -3,30 +3,36 @@ var socket = io();
 socket.on('connect', () => {
             console.log('connected to server');
 
-            // socket.emit('createEmail', {
-            //     from: 'petru@exe.com',
-            //     text: "ce faci ba",
-            //     createdAt: 321
-            // });
-
-            // socket.emit('createMessage', {
-            //     from: "Mariusila",
-            //     text: "mesaj de la client"
-        
-            // });
-
-            
         });
 
 socket.on('newMessage', (message) => {
             console.log('mesaj primit de la server', message);
-            document.write('mesaj primit de la server');
+           var li = jQuery('<li></li>');
+           li.text(`${message.from}: ${message.text}`);
+           jQuery('#messages').append(li);
         });
-        
+
 socket.on('disconnect', () => {
             console.log('disconenected from server');
         });
 
-socket.on('newEmail', (email) => {
-    console.log('new email', email);
+
+// socket.emit('createMessage', {
+//     from: 'Frank',
+//     text: 'dsadsadasda'
+// }, (data) => {
+//     console.log('got it', data);
+// });
+
+jQuery('#message-form').on('submit', (e) => {
+    e.preventDefault();
+
+    socket.emit('newMessage', {
+        from:'User',
+        // text: $(":name-message")[0].val()
+        // jQuery('[name-message]').val()
+        text: jQuery( '[name=message]' ).val()
+    }, () => {
+
+    });
 });
