@@ -22,6 +22,27 @@ var scrollToBottom = () => {
 
 socket.on('connect', () => {
             console.log('connected to server');
+            if (window.location.search !== "") { 
+                var params = jQuery.deparam(window.location.search);
+            } else {
+                var params = {user: "User nedefinit", room: "No Room"};
+            }
+            
+            
+
+            if (params !== 'undefined') {
+
+                socket.emit('join', params, (err) => {
+                    if (err) {
+                        console.log(err);
+                        // window.location.href = '/';
+                    } else {
+                        console.log('no error');
+                    }
+    
+                });
+            };
+            
 
         });
 
